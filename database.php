@@ -12,7 +12,7 @@ class database{
         $this->host = 'localhost';
         $this->username = 'root';
         $this->password = '';
-        $this->database = 'huisterduin';
+        $this->database = '';
 
         try {
             $dsn = "mysql:host=$this->host;dbname=$this->database";
@@ -37,6 +37,7 @@ class database{
             throw $e;
         }
        }
+    
         //LOGIN VOOR GEBRUIKERS/MEDEWERKERS
         function Login($username,$password){
             $sql = "SELECT * FROM medewerker WHERE username ='$username' and password ='$password'";
@@ -65,14 +66,14 @@ class database{
     }
 
     //  UPDATE/EDIT VALUES VAN DE DATABASE
-    public function edit($sql, $placeholder, $file) {
+    public function edit($sql, $placeholder, $file){
         $stmt = $this->dbh->prepare($sql);
         $stmt->execute($placeholder);
         header("location: " . $file);
     }
+    
     // DELETE EEN RECORD VAN DE DATABASE
-    public function delete($sql, $placeholder, $file) {
-
+    public function delete($sql, $placeholder, $file){
         $statement = $this->dbh->prepare($sql);
         $statement->execute($placeholder);
         header("location: " . $file);
